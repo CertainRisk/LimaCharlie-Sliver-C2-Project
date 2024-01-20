@@ -198,10 +198,63 @@ whoami
 
 If our rule worked, the system shell will hang and fail to return anything and shut down, which it did!
 
-## Handling False Positives
+## Quelling False Positives
 
     Crafting rules to limit false detections.
+![image](https://github.com/CertainRisk/LimaCharlie-Sliver-C2-Project/assets/141761181/93a90bde-82db-42ee-8421-1d7df34e1a6d)
+
+svchost.exe is well known so it is a good candidate to show off how we can limit the svchost detections
+![image](https://github.com/CertainRisk/LimaCharlie-Sliver-C2-Project/assets/141761181/abd59f3b-9784-4339-820c-1f6c42e8bfb5)
+
+Paths other than System 32 is an option in order to improve the detection rule 
+
+Craft a false positive rule that runs in conjunction with he detection rule in order to suppress events that meet certain criteria
+
+Considered critera:
+Normal and expected path C:\Windows\system32\svchost.exe
+
+The command line arguments:
+Expected ones
+-k group of services
+-p process mitigation policies
+-s name of specific service
+![image](https://github.com/CertainRisk/LimaCharlie-Sliver-C2-Project/assets/141761181/c6a258e4-747e-497c-a58a-0d3db0ba5456)
+
+You can simply mark it as a false positive in LimaCharlie which will automatically create the grounds in which to start building the D&R rule.
+
+![image](https://github.com/CertainRisk/LimaCharlie-Sliver-C2-Project/assets/141761181/a3bf7124-efb0-49aa-9b38-b4b9a8d536ee)
+![image](https://github.com/CertainRisk/LimaCharlie-Sliver-C2-Project/assets/141761181/0e6bb538-77f2-45a0-850c-affbed3c93f8)
+
+The detection rule category is Suspicious svchost execution  
+
+It also mentions the most common C path
+
+It also carried the command line values
+
+How to account for service names and things that are apt to change. 
+-k is predictable and is almost always there
+![image](https://github.com/CertainRisk/LimaCharlie-Sliver-C2-Project/assets/141761181/55ef8b56-8c7d-4913-9a2c-ec8400e4bd31)
+
+HASH 
+Since Hashes change due to updates, we can't really rely on this. 
+![image](https://github.com/CertainRisk/LimaCharlie-Sliver-C2-Project/assets/141761181/667d25e3-e0dc-4596-9f57-1ee004bd999d)
+
+Not great when you want it detected on all hosts.
+![image](https://github.com/CertainRisk/LimaCharlie-Sliver-C2-Project/assets/141761181/ed76e57a-4729-4e0a-94b7-8df146769877)
+
+![image](https://github.com/CertainRisk/LimaCharlie-Sliver-C2-Project/assets/141761181/f3d164d8-3ecb-447f-b6f8-29352e7d12e6)
+
+TARGET DETECTION
+You can find the raw event you'd want to test the rule against. 
+
+Detections in LimaCharlie - Grab a False Positive and put it in the test detection box to test if it would have squished it
+![image](https://github.com/CertainRisk/LimaCharlie-Sliver-C2-Project/assets/141761181/c89ef594-ff8e-41b3-9146-f7982c2bcadf)
+![image](https://github.com/CertainRisk/LimaCharlie-Sliver-C2-Project/assets/141761181/cd79db90-f654-4c8f-90a7-0f2ca3aefc1e)
 
 ## Advanced EDR Capabilities
 
     Adding YARA signatures for malware detection.
+Digging into the advanced capabilities of EDR sensors through the use of adding YARA signatures to detect for the presence of malware
+![image](https://github.com/CertainRisk/LimaCharlie-Sliver-C2-Project/assets/141761181/248dcd9b-b9a1-4343-a478-38b36c41ccca)
+
+TBC
